@@ -1,4 +1,4 @@
-from typing import Literal, Annotated
+from typing import Literal, Annotated, Union
 
 from fastapi import UploadFile, Form, File
 from pydantic import BaseModel, ConfigDict, Field
@@ -13,7 +13,7 @@ class UserBase(BaseModel):
 
 
 class UserCreate(UserBase):
-    image: UploadFile | None = Field(File(...), exclude=True)
+    image: Union[UploadFile, None] = Field(File(...), exclude=True)
 
     @classmethod
     def from_formdata(
